@@ -31,8 +31,6 @@ namespace WP8Runner
       private DispatcherTimer _countdown;
       private long _startTime;
       private String fileName = "";
-      private StreamWriter writer;
-      private int counter = 1;
       private int counter2 = 1;
       private double latitude;
       private double longitude;
@@ -67,9 +65,10 @@ namespace WP8Runner
           _line = new MapPolyline();
           _line.StrokeColor = Colors.Red;
           _line.StrokeThickness = 5;
-          Map.MapElements.Add(_line);
+          //Map.MapElements.Add(_line);
           _timer.Interval = TimeSpan.FromSeconds(1);
           _timer.Tick += Timer_Tick;
+
       }
 
 
@@ -119,6 +118,8 @@ namespace WP8Runner
           else
           {
               restart();
+              ShowMyLocation();
+              Map.MapElements.Add(_line);
               _watcher.Start();
               _timer.Start();
               _startTime = System.Environment.TickCount;
@@ -146,7 +147,7 @@ namespace WP8Runner
 
           //create a small circle
           Ellipse myCircle = new Ellipse();
-          myCircle.Fill = new SolidColorBrush(Colors.Blue);
+          myCircle.Fill = new SolidColorBrush(Colors.Green);
           myCircle.Height = 20;
           myCircle.Width = 20;
           myCircle.Opacity = 50;
@@ -175,9 +176,6 @@ namespace WP8Runner
       private void Watcher_PositionChanged(object sender, GeoPositionChangedEventArgs<GeoCoordinate> e)
       {
           var coord = new GeoCoordinate(e.Position.Location.Latitude, e.Position.Location.Longitude);
-
-          LongitudeTextBlock.Text = e.Position.Location.Longitude.ToString();
-          // LatitudeTextBlock.Text = e.Position.Location.Latitude.ToString();
           int gained = int.Parse(caloriesLabel.Text.ToString());
 
 
@@ -374,11 +372,13 @@ namespace WP8Runner
           //create a maplayer to contain the overlay
           MapLayer layer = new MapLayer();
           layer.Add(myLocationOverlay);
-
+          Map.Layers.Clear();
+          Map.MapElements.Clear();
           //add the layer to the map
           Map.Layers.Add(layer);
           StartButton.IsEnabled = true;
           start.IsOpen = false;
+          ShowMyLocation();
       }
 
       private void pointClick(object sender, RoutedEventArgs e)

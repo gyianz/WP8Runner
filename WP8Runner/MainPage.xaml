@@ -36,7 +36,7 @@
             <!-- the map -->
             <maps:Map x:Name="Map"
             PedestrianFeaturesEnabled="True"
-            ZoomLevel="18"/>
+            ZoomLevel="18" FontFamily="Portable User Interface"/>
 
 
             <!-- run statistics -->
@@ -62,32 +62,29 @@
                 HorizontalAlignment="Center" Grid.Row="1"/>
 
                     <!-- speed-->
-                    <TextBlock Text="Speed(km/h):" Grid.Column="2" Grid.Row="1"/>
+                    <TextBlock Text="Speed:" Grid.Column="2" Grid.Row="1"/>
                     <TextBlock Text="00:00" Grid.Column="3" x:Name="speedLabel"
                 HorizontalAlignment="Center" Grid.Row="1"/>
 
                     <Button Content="Start"
-                  Grid.Row="2" Grid.ColumnSpan="2"
+                  Grid.Row="2" Grid.ColumnSpan="4"
                   Click="StartButton_Click"
                   x:Name="StartButton" IsEnabled="False"/>
-                    <Button Content="get current"
-                    	Click="current_click" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2"
-                    	x:Name="getCurrent" Margin="0,80,0,0"/>
                 </Grid>
             </Grid>
-            <TextBlock x:Name="timer" HorizontalAlignment="Left" TextWrapping="Wrap" Text="00:00:00" VerticalAlignment="Top" Foreground="#FFEC0909"/>
-            <TextBlock x:Name="LongitudeTextBlock" HorizontalAlignment="Left" Margin="0,35,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Foreground="#FFEC0909"/>
-            <TextBlock x:Name="fileNameDebug" HorizontalAlignment="Left" Margin="0,65,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Foreground="#FFEC0909"/>
         </Grid>
 
         <Popup x:Name="popup" Grid.Row="2" Grid.Column="2">
-            <Border  BorderThickness="2" BorderBrush="{StaticResource PhoneButtonBasePressedForegroundBrush}" Background="{StaticResource PhoneBackgroundBrush}">
-                <StackPanel Background="Black" Height="262">
-                    <Image Source="/Images/disclaimer.png" HorizontalAlignment="Center" Stretch="Fill" Margin="0,15,0,5"/>
-                    <TextBlock Text="Warning" TextAlignment="Center" FontSize="40" Margin="10,0" />
-                    <TextBlock Text="Your speed is beyong normal running speeed." FontSize="21" Margin="10,0" Height="72" />
+            <Border  BorderThickness="2" BorderBrush="{StaticResource PhoneButtonBasePressedForegroundBrush}" Background="{StaticResource PhoneBackgroundBrush}" Width="454" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,0,0,0">
+                <StackPanel Background="Black" Height="262" Margin="30,0,8,0" HorizontalAlignment="Left">
+                    <TextBlock Text="Warning" TextAlignment="Center" FontSize="40" Margin="0,0,10,0" FontFamily="Portable User Interface" HorizontalAlignment="Center" />
+                    <TextBlock FontSize="21" Margin="0,0,10,0" Height="72" HorizontalAlignment="Center" >
+                    	<Run Text="         "/>
+                    	<LineBreak/>
+                    	<Run Text="Stop cheating and start running"/>
+                    </TextBlock>
                     <StackPanel Orientation="Horizontal" Margin="0,10">
-                        <Button x:Name="btn_continue"  Content="continue" Width="215" Click="btn_continue_Click"/>
+                        <Button x:Name="btn_continue"  Content="continue" Width="392" Click="btn_continue_Click" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </StackPanel>
             </Border>
@@ -110,10 +107,10 @@
                 </StackPanel>
             </Border>
         </Popup>
-        <Popup x:Name="sucessBox" Grid.Row="2" Grid.Column="2" Margin="20,0,0,0">
-            <Border  BorderThickness="2" BorderBrush="{StaticResource PhoneButtonBasePressedForegroundBrush}">
+        <Popup x:Name="sucessBox" Grid.Row="2" Grid.Column="2" Margin="85,-300,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Border  BorderThickness="2" BorderBrush="{StaticResource PhoneButtonBasePressedForegroundBrush}" Height="141" Width="314">
                 <StackPanel Background="Black">
-                    <TextBlock FontSize="36" Text="You've got points"/>
+                    <TextBlock FontSize="36" Text="You've got points" HorizontalAlignment="Center"/>
                     <Button x:Name="pointButton" Click="pointClick">OK</Button>
                 </StackPanel>
             </Border>
