@@ -24,9 +24,9 @@ namespace WP8Runner
             try
             {
                 
-                if (IsolatedStorageSettings.ApplicationSettings.Contains("mostPoints"))
+                if (IsolatedStorageSettings.ApplicationSettings.Contains("totalPoints"))
                 {
-                    mostPoint.Text = IsolatedStorageSettings.ApplicationSettings["mostPoints"] as string;
+                    mostPoint.Text = IsolatedStorageSettings.ApplicationSettings["totalPoints"] as string;
                  
                 }
                 if (IsolatedStorageSettings.ApplicationSettings.Contains("longestRun"))
@@ -53,9 +53,9 @@ namespace WP8Runner
             
 
             try{
-                if (IsolatedStorageSettings.ApplicationSettings.Contains("mostPoints"))
+                if (IsolatedStorageSettings.ApplicationSettings.Contains("totalPoints"))
                 {
-                    String points = IsolatedStorageSettings.ApplicationSettings["mostPoints"] as string;
+                    String points = IsolatedStorageSettings.ApplicationSettings["totalPoints"] as string;
                     int rawPoints = int.Parse(points);
 
                     if (rawPoints < 100)

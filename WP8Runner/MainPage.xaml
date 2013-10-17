@@ -57,7 +57,7 @@
                 HorizontalAlignment="Center"/>
 
                     <!-- calories -->
-                    <TextBlock Text="Calories:" Grid.Row="1"/>
+                    <TextBlock Text="Points:" Grid.Row="1"/>
                     <TextBlock Text="0" Grid.Column="1" x:Name="caloriesLabel"
                 HorizontalAlignment="Center" Grid.Row="1"/>
 
@@ -81,8 +81,8 @@
         </Grid>
 
         <Popup x:Name="popup" Grid.Row="2" Grid.Column="2">
-            <Border  BorderThickness="2" BorderBrush="{StaticResource PhoneAccentBrush}">
-                <StackPanel Background="Red" Height="262">
+            <Border  BorderThickness="2" BorderBrush="{StaticResource PhoneButtonBasePressedForegroundBrush}" Background="{StaticResource PhoneBackgroundBrush}">
+                <StackPanel Background="Black" Height="262">
                     <Image Source="/Images/disclaimer.png" HorizontalAlignment="Center" Stretch="Fill" Margin="0,15,0,5"/>
                     <TextBlock Text="Warning" TextAlignment="Center" FontSize="40" Margin="10,0" />
                     <TextBlock Text="Your speed is beyong normal running speeed." FontSize="21" Margin="10,0" Height="72" />
@@ -93,8 +93,11 @@
             </Border>
         </Popup>
         <Popup x:Name="start" Grid.Row="2">
-            <Border  BorderThickness="2" BorderBrush="{StaticResource PhoneAccentBrush}">
-                <StackPanel Background="Red" Height="468" Width="442" Margin="15,25,0,0">
+            <Border  BorderThickness="2" BorderBrush="{StaticResource PhoneBackgroundBrush}">
+                <Border.Background>
+                    <ImageBrush Stretch="Fill"/>
+                </Border.Background>
+                <StackPanel Background="#FF3C3333" Height="468" Width="442" Margin="15,25,0,0">
                     <Image Source="/Images/disclaimer.png" HorizontalAlignment="Center" Stretch="Fill" Margin="0,15,0,5"/>
                     <TextBlock Text="Instruction" TextAlignment="Center" FontSize="40" Margin="10,0" />
                     <TextBlock Text="Choose your direction" FontSize="30" Margin="10,0" Height="72" HorizontalAlignment="Center" />
@@ -108,9 +111,9 @@
             </Border>
         </Popup>
         <Popup x:Name="sucessBox" Grid.Row="2" Grid.Column="2" Margin="20,0,0,0">
-            <Border  BorderThickness="2" BorderBrush="{StaticResource PhoneAccentBrush}">
-                <StackPanel Background="Red">
-                    <TextBlock FontSize="36">One point for user</TextBlock>
+            <Border  BorderThickness="2" BorderBrush="{StaticResource PhoneButtonBasePressedForegroundBrush}">
+                <StackPanel Background="Black">
+                    <TextBlock FontSize="36" Text="You've got points"/>
                     <Button x:Name="pointButton" Click="pointClick">OK</Button>
                 </StackPanel>
             </Border>

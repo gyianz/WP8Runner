@@ -174,26 +174,34 @@ namespace WP8Runner
           initialLong = e.Position.Location.Longitude;
           //    counter++;
           //   }
-
+          int gained = int.Parse(caloriesLabel.Text.ToString());
           // WriteToFile(e.Position.Location.Longitude.ToString(), e.Position.Location.Latitude.ToString());
           if (buttonState.Equals("top"))
           {
               if (e.Position.Location.Latitude > latitude)
+                  gained += 10;
+                  caloriesLabel.Text = gained.ToString();
                   sucessBox.IsOpen = true;
           }
           else if (buttonState.Equals("left"))
           {
               if (e.Position.Location.Longitude < longitude)
+                  gained += 10;
+                  caloriesLabel.Text = gained.ToString();
                   sucessBox.IsOpen = true;
           }
           else if (buttonState.Equals("right"))
           {
               if (e.Position.Location.Longitude > longitude)
+                  gained += 10;
+                  caloriesLabel.Text = gained.ToString();
                   sucessBox.IsOpen = true;
           }
           else if (buttonState.Equals("bottom"))
           {
               if (e.Position.Location.Latitude < latitude)
+                  gained += 10;
+                  caloriesLabel.Text = gained.ToString();
                   sucessBox.IsOpen = true;
           }
 
@@ -372,9 +380,9 @@ namespace WP8Runner
           }
           else
           {
-              int totalPoints = int.Parse(settings["mostPoints"].ToString());
+              int totalPoints = int.Parse(settings["totalPoints"].ToString());
               totalPoints = totalPoints + int.Parse(caloriesLabel.Text.ToString());
-              settings["mostPoints"] = totalPoints.ToString();
+              settings["totalPoints"] = totalPoints.ToString();
           }
 
           if (!settings.Contains("furthestRun"))
