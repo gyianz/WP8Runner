@@ -36,14 +36,26 @@ namespace WP8Runner
       private int counter2 = 1;
       private double latitude;
       private double longitude;
-      private const double rangeSmall = 0.0020;
+      private const double rangeSmall = 0.0010;
       private MapLayer layer;
       private String buttonState = "";
       private String dataString = "";
+      private int difficulty = 1;
       //private Popup popup = new Popup();
       public MainPage()
       {
           InitializeComponent();
+
+          IsolatedStorageSettings settings = IsolatedStorageSettings.ApplicationSettings;
+          // txtInput is a TextBox defined in XAML.
+          if (!settings.Contains("difficulty"))
+          {
+              settings.Add("difficulty", 1);
+          }
+          else
+          {
+              difficulty = int.Parse(settings["difficulty"].ToString());
+          }
 
           _watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.High);
           _watcher.Start();
@@ -166,7 +178,7 @@ namespace WP8Runner
 
           LongitudeTextBlock.Text = e.Position.Location.Longitude.ToString();
           // LatitudeTextBlock.Text = e.Position.Location.Latitude.ToString();
-
+          int gained = int.Parse(caloriesLabel.Text.ToString());
 
 
           // if (counter == 1) {
@@ -174,35 +186,47 @@ namespace WP8Runner
           initialLong = e.Position.Location.Longitude;
           //    counter++;
           //   }
-          int gained = int.Parse(caloriesLabel.Text.ToString());
+          
           // WriteToFile(e.Position.Location.Longitude.ToString(), e.Position.Location.Latitude.ToString());
           if (buttonState.Equals("top"))
           {
               if (e.Position.Location.Latitude > latitude)
+              {
+
+                  sucessBox.IsOpen = true;
                   gained += 10;
                   caloriesLabel.Text = gained.ToString();
-                  sucessBox.IsOpen = true;
+              }
           }
           else if (buttonState.Equals("left"))
           {
               if (e.Position.Location.Longitude < longitude)
+              {
+
+                  sucessBox.IsOpen = true;
                   gained += 10;
                   caloriesLabel.Text = gained.ToString();
-                  sucessBox.IsOpen = true;
+              }
           }
           else if (buttonState.Equals("right"))
           {
               if (e.Position.Location.Longitude > longitude)
+              {
+
+                  sucessBox.IsOpen = true;
                   gained += 10;
                   caloriesLabel.Text = gained.ToString();
-                  sucessBox.IsOpen = true;
+              }
           }
           else if (buttonState.Equals("bottom"))
           {
               if (e.Position.Location.Latitude < latitude)
+              {
+
+                  sucessBox.IsOpen = true;
                   gained += 10;
                   caloriesLabel.Text = gained.ToString();
-                  sucessBox.IsOpen = true;
+              }
           }
 
 
@@ -282,35 +306,52 @@ namespace WP8Runner
       private void top_clicked(object sender, RoutedEventArgs e)
       {
           // Random rand = new Random();
-          latitude = initialLa + rangeSmall;
-          longitude = initialLong;
-          buttonState = "top";
-          createPin(latitude, longitude);
+          try
+          {
+              IsolatedStorageSettings settings = IsolatedStorageSettings.ApplicationSettings;
+              if (IsolatedStorageSettings.ApplicationSettings.Contains("difficulty"))
+              {
+                  latitude = initialLa + rangeSmall * difficulty;
+                  longitude = initialLong;
+                  buttonState = "top";
+                  createPin(latitude, longitude);
+              }
+          }
+          catch
+          {
+
+          }
       }
 
       private void left_clicked(object sender, RoutedEventArgs e)
       {
-          latitude = initialLa;
-          longitude = initialLong - rangeSmall;
-          buttonState = "left";
-          createPin(latitude, longitude);
+         
+                  latitude = initialLa;
+                  longitude = initialLong - rangeSmall * difficulty;
+                  buttonState = "left";
+                  createPin(latitude, longitude);
+          
       }
 
       private void right_clicked(object sender, RoutedEventArgs e)
       {
-          // Random rand = new Random();
-          latitude = initialLa;
-          longitude = initialLong + rangeSmall;
-          buttonState = "right";
-          createPin(latitude, longitude);
+         
+                  // Random rand = new Random();
+                  latitude = initialLa;
+                  longitude = initialLong + rangeSmall * difficulty;
+                  buttonState = "right";
+                  createPin(latitude, longitude);
+         
       }
 
       private void bottom_clicked(object sender, RoutedEventArgs e)
       {
-          latitude = initialLa - rangeSmall;
-          longitude = initialLong;
-          buttonState = "bottom";
-          createPin(latitude, longitude);
+         
+                  latitude = initialLa - rangeSmall * difficulty;
+                  longitude = initialLong;
+                  buttonState = "bottom";
+                  createPin(latitude, longitude);
+          
       }
 
 

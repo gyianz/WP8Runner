@@ -14,7 +14,7 @@ namespace WP8Runner
     public partial class Options : PhoneApplicationPage
     {
 
-        private int difficulty = 0;
+        private int difficulty = 1;
 
         public Options()
         {
